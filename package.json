@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "name": "reactive-way",
+  "version": "0.1.0",
+  "description": "Reactive Way (May 2014, FrontTrends presentation)",
+  "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/medikoo/reactive-way.git"
+  },
+  "dependencies": {
+    "bespoke": "0.4.x",
+    "bespoke-history": "0.1.x",
+    "bespoke-keys": "0.1.x",
+    "bespoke-notes": "0.2.x",
+    "bespoke-progress": "0.1.x",
+    "bespoke-scale": "0.2.x",
+    "bespoke-substeps": "~0.1.1",
+    "bespoke-sync": "~0.1.2",
+    "bespoke-touch": "0.1.x",
+    "connect": "~2.14.5",
+    "deferred": "~0.7.1",
+    "es5-ext": "~0.10.4",
+    "highlight.js": "8.x",
+    "memoizee": "~0.3.2",
+    "st": "~0.4.1",
+    "webmake": "~0.3.30"
+  },
+  "devDependencies": {
+    "webmake-middleware": "~0.1.1"
+  },
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "licence": "MIT"
+}
