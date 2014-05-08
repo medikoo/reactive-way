@@ -51,7 +51,7 @@ p a {
 p, ul, ol {
 	color: #1D6EA0;
 }
-p.img { text-align: center; }
+p.img { text-align: center; margin-bottom: 0; }
 img.diagram {
 	background: rgba(255, 255, 255, 0.5);
 	padding: 40px;
@@ -287,6 +287,14 @@ div#dbjs-example th, div#dbjs-example td {
 	font-size: 20px;
 	padding: 5px;
 	overflow: hidden;
+}
+
+section#reactive-programming h1 {
+	font-size: 102px;
+}
+
+section#reactive-programming img {
+	opacity: 0.4;
 }
 
 section#in-memory-database img {
