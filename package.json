@@ -10,24 +10,32 @@
   },
   "dependencies": {
     "bespoke": "0.4.x",
-    "bespoke-history": "0.1.x",
+    "bespoke-history": "~0.1.1",
     "bespoke-keys": "0.1.x",
-    "bespoke-notes": "0.2.x",
+    "bespoke-notes": "~0.2.2",
     "bespoke-progress": "0.1.x",
-    "bespoke-scale": "0.2.x",
-    "bespoke-substeps": "~0.1.1",
+    "bespoke-scale": "git://github.com/medikoo/bespoke-scale.git#reread-slide-size",
+    "bespoke-substeps": "~0.1.2",
     "bespoke-sync": "~0.1.2",
     "bespoke-touch": "0.1.x",
-    "connect": "~2.14.5",
-    "deferred": "~0.7.1",
+    "connect": "~2.15.0",
     "es5-ext": "~0.10.4",
+    "d": "~0.1.1",
+    "dbjs": "0.0.1",
+    "dbjs-dom": "0.0.1",
+    "dbjs-domjs": "0.0.1",
+    "dbjs-ext": "0.0.1",
+    "deferred": "~0.7.1",
+    "dom-ext": "0.0.1",
+    "domjs": "git://github.com/medikoo/domjs.git",
     "highlight.js": "8.x",
     "memoizee": "~0.3.2",
+    "observable-value": "0.0.2",
     "st": "~0.4.1",
-    "webmake": "~0.3.30"
+    "webmake": "~0.3.32"
   },
   "devDependencies": {
-    "webmake-middleware": "~0.1.1"
+    "webmake-middleware": "~0.1.2"
   },
   "scripts": {
     "start": "node server/index.js"

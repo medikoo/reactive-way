@@ -54,6 +54,7 @@ db.objects.on('update', function (event) {
 	localStorage[lsPrefix + event.object.__valueId__] = event.stamp + '.' + value;
 });
 
+// Configure the view
 module.exports = function () {
 	var onDelete = function () { db.objects.delete(db.Person.getById(this.dataset.id)); };
 	var onOpenEdit = function () {
@@ -113,7 +114,7 @@ module.exports = function () {
 					placeholder: "Last Name" })),
 				td(input({ dbjs: db.Person.prototype._birthDate, name: 'birthDate',
 					placeholder: "Date of birth" })),
-				td(input({ type: 'submit', value: "+" })))
+				td(button({ type: 'submit' }, "+")))
 		)))),
 		div(table({ class: 'serialize-log' }, thead(th("Stamp"), th("Key"), th("Value")),
 			logBody = tbody())));

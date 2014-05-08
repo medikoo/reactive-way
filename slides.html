@@ -15,11 +15,9 @@
 	<aside>
 <p>Today I'll provide an insight into web applications reactive architecture, that I use at my work.</p>
 
-<p>I'm part of a team of consultants that help UNCTAD deliver egovernment solutions to citizens in various parts of the world. It's about simplification of some beaucratic procedues, and providing a possiblity to go through them (e.g. company registrations) online.</p>
+<p>I'm part of a team of consultants that help UNCTAD deliver egovernment solutions (full-stack JS, HTML5) to citizens in various parts of the world.</p>
 
-<p>Our applications are full-stack JavaScript, HTML5 solutions.</p>
-
-<p>At the end of my speech I will showcase application that we recently released and which I hope make company registration process in Buenos Aires area a bit easier.</p>
+<p>At the end of my speech I will showcase application that we recently released and which I hope make company registration process in Buenos Aires area easier.</p>
 		<hr />
 		<p>Made with <a href="http://markdalgleish.com/projects/bespoke.js/">Bespoke.js</a> engine developed by <a href="https://twitter.com/markdalgleish">Mark Dalgleish</a></p>
 		<p>See <a href="https://github.com/medikoo/reactive-way">Github</a> for a source code of this presentation, and instructions on how to run it locally</p>
@@ -32,35 +30,22 @@
 <section data-bespoke-id="fusion-reactor">
 	<div class="content"><a href="https://twitter.com/mraleph/statuses/411549064787152896" target="_blank"><img src="/mraleph.png" width="500" /></a></div>
 	<aside>
-<p>To those who doesn't know Vyacheslaw was part of a team working on V8 JavaScript engine, that's being used in Google Chrome</p>
-<p>Currently Vyacheslaw is involved into development of Dart and in JavaScript world his opinions are not the ones that are most popular, but I think in that he made really important point in that tweet</p>
+<p>To those who don't know, Vyacheslav was part of a team working on V8 JavaScript engine, which is being used in Google Chrome</p>
+<p>Currently Vyacheslav is involved into development of Dart and in JavaScript world his opinions are not the ones that are most popular, but I think in that he made really important point in that tweet</p>
 		<p>The way we build web applications of today in many cases do not touch the potential that modern engines have to offer</p>
 		<p>Popular frameworks are still prisoners of support of ES3 based engines. We waste a lot of time on micro-optimizations and we like to repeat the patterns with which we developed web applications 5, 10 even 15 years ago, as this is what we're familiar with and safe with</p>
 		<p>Sometimes it seems that we didn't notice now drastically hardware that runs our apps improved, and that todays browsers are very different beasts then one we've dealt with years ago.</p>
 	</aside>
 </section>
-
-<section data-bespoke-id="red-flag-law">
-	<div class="content"><a href="http://en.wikipedia.org/wiki/Locomotive_Acts#The_Locomotive_Act_1865_.28Red_Flag_Act.29" target="_blank"><img src="/red-flag.jpg" width="500" /></a></div>
-	<aside>
-		<p>Thinking of it, reminded me restrictions we put on ourselves, when first automobiles where on the roads.</p>
-		<p>In UK in 1865 it was required that (for overall safety) a man with a red flag was walking at least 50 meters ahead of each vehicle</p>
-	</aside>
-</section>
-
 <section data-bespoke-id="web-architecture">
 	<div class="content">
 		<h2>Typical website delivery architecture</h2>
 		<img class="diagram" src="/web-app-architecture.png" width="500" />
 	</div>
 	<aside>
-		<p>Let's start with some very very general overview, of how we actually deliver applications</p>
+		<p>Before I'll get into raw meat, I'd like us to have a quick and very general overview of how we deliver applications.</p>
 		<p>We can distinguish three important components:</p>
-		<p>There's a client, right where consumer of applicationis</p>
-		<p>There's a server, technically an on going process that responds to requests, proceeds with algorithsm and delivers expected content</p>
-		<p>Additionally there's a persistent layer, where we keep our data physically.</p>
-		<p>Importance of those components not really changed over time.</p>
-		<p>It's however their capacities and roles we may assign to them which changed significantly in last years</p>
+		<p>A persistent storage for all the data, a server which runs business logic, responds do requests, delivers the interface, and of course a client right in front of a consumer of application</p>
 	</aside>
 </section>
 
@@ -69,7 +54,7 @@
 		<h2>Over a decade ago..</h2>
 		<h3>Client browser</h3>
 		<ul>
-			<li>HTML renderer with style and scripting support</li>
+			<li>HTML renderer with basic style and scripting support</li>
 			<li>All user requests directed to server</li>
 		</ul>
 		<h3>Server process</h3>
@@ -80,13 +65,7 @@
 		</ul>
 	</div>
 	<aside>
-		<p>Let's take a look back</p>
-		<p>Over a decade ago client browser was not much more than a HTML renderer</p>
-		<p>Basic styles, basic interactions scripted</p>
-		<p>All requests (new pages, form submissions) directed and handled by server</p>
-		<p>HTTP server</p>
-		<p>Server-side scripts reevaluated on each request<br />(CGI, early PHP)</p>
-		<p>Data read and stored to physical storage, on each request</p>
+		<p>What was the role of those components not that long ago (?)</p>
 	</div>
 	</aside>
 </section>
@@ -97,9 +76,9 @@
 		<p class="img"><img src="/serialize-unserialize.png" width="400" /></p>
 	</div>
 	<aside>
-		<p>Our hardware let us</p>
-		<p>Read input & process & Serialize & Save to disk</p>
-		<p>Restore from disk & Unserialize & Process & Display</p>
+		<p>Delivery of applications involved constant and repeated data transformations</p>
+		<p>Typical request handling looked that, when request came from a client, CGI or PHP script was reevaluted, this script <i>unserialized</i> data from physical storage, produced expected response and it was gracefully killed.</p>
+		<p>Exactly same loop was repated on another request and so on, so on</p>
 	</aside>
 </section>
 
@@ -124,23 +103,18 @@
 		</ul>
 	</div>
 	<aside>
+		<p>Today with Node.js, we not only have light process that's server of an application but it also can be a process that handles business logic of our application, and it's not we that reinitialize that process on each request.</p>
 	</aside>
 </section>
 
 <section data-bespoke-id="serialize-unserialize-today">
 	<div class="content">
-		<p class="img"><img src="/serialize-unserialize-today.png" width="700" /></p>
+		<p class="img"><img src="/serialize-unserialize-today.png" width="750" /></p>
 	</div>
 	<aside>
-	</aside>
-</section>
-
-<section data-bespoke-id="serialize-unserialize-today-loop">
-	<div class="content serialize">
-		<h1>yet still.. we do a lot of:</h1>
-		<h2><img src="/loop.svg" />Serialize & Unserialize</h2>
-	</div>
-	<aside>
+		<p>Still quite often we try to deliver applications repeating same patterns we learned to work with over a decade ago</p>
+		<p>e.g. in SPA applications we generate HTML strings, inject it via innerHTML, then search for created elements with some querySelector mechanism to provide additional behaviors.. and all of that happenswithin same, one memory process</p>
+		<p>Same with databases, if we think of replicating some logic that was handled by database storage on server, we assume we need to bring some SQL or other <i>external</i> language to be able to process our data efficiently</p>
 	</aside>
 </section>
 
@@ -150,18 +124,22 @@
 		<p class="img"><img src="/modern-client.png" width="600" /></p>
 	</div>
 	<aside>
+		<p>What if we'll try to unify our architecture in that <b>one</b> process</p>
+		<p>We can create DOM directly, and omit serialize/unserialize HTML step</p>
+		<p>But it's not only about how we generate views. We can also take most of relational data handling logic step (one that usually was part of database engine, like SQL) to be a part of our process, and leave persistent layer just with primitive key/value forms</p>
+<p>Technically we can make our application process to be a living organism, that works with the rules we defined for it<p>
 	</aside>
 </section>
-
 
 <section data-bespoke-id="reactive-programming">
 	<div class="content">
 		<h1>Reactive programming</h1>
 	</div>
 	<aside>
-		<p>What is reactive programming?</p>
-		<p>To clarify I'm not going to talk about Facebook's React, or any other popular reactive stack that recently emerged</p>
-		<p>Let's first talk about Reactive in simplest, purest form with no noise</p>
+		<p>When you start to think and work that way, you instinctively get into reactive programming</p>
+		<p><b>What is reactive programming?</b></p>
+		<p>To clarify I'm not going to talk about Facebook's React, or any other popular stack with "reactive" in its name that recently emerged</p>
+		<p>Let's talk about Reactive in simplest, purest form with no framework noise</p>
 	</aside>
 </section>
 
@@ -171,9 +149,7 @@
 		<p class="img"><img src="/spreadsheet.gif" width="400" /></p>
 	</div>
 	<aside>
-		<p>What is reactive programming?</p>
-		<p>To clarify I'm not going to talk about Facebook's React, or any other popular reactive stack that recently emerged</p>
-		<p>Let's first talk about Reactive KISS, simplest as it can get</p>
+		<p>Reactive programming is about assuring bindings between our mutable data, transparantly behind the scenes</p>
 	</aside>
 </section>
 
@@ -188,36 +164,30 @@ console.log(a); // <span class="substep" data-action="remove" data-order="1">?</
 		<h3 class="substep" data-order="1">is obviously not reactive</h3>
 	</div>
 	<aside>
-		<p>What is reactive programming?</p>
-		<p>To clarify I'm not going to talk about Facebook's React, or any other popular reactive stack that recently emerged</p>
-		<p>Let's talk about Reactive approach, in simplest way</p>
 	</aside>
 </section>
 
 <section data-bespoke-id="reactive-via-recalculate">
 	<div class="content">
 		<h1>How to achieve reactiveness in JS</h1>
-		<h2>1. Recalculate after change</h2>
+		<h2 class="substep" data-order="1">1. Recalculate after change</h2>
 		<pre><code>var a, b, c;
-var refresh = function () { a = b + c; };
-
+<span class="substep" data-order="1" data-action="insert">var refresh = function () { </span>a = b + c;<span class="substep" data-order="1" data-action="insert"> };</span>
 b = 2;
 c = 3;
-<span class="substep">refresh();
+<span class="substep" data-order="1">refresh();
 console.log(a); // 5</span>
 
 <span class="substep">b = 4;</span>
-<span class="substep">refresh();
+<span class="substep" data-order="3">refresh();
 console.log(a); // 7</span></code></pre>
 	</div>
 	<aside>
-		<p>This how reactivity works in most popular reactive tools today</p>
-		<p>and it's actually how you can force reactiveness to not really reactive architecture</p>
-		<p>It's what we do when we still work with HTML strings in SPA applications</p>
-		<p>On change we regenerate new HTML, replace with new one</p>
-		<p>Make sure old one is garbage collected</p>
-		<p>Still I would call it an emulatiom of actual reactivity</p>
-		<p>We can do better.. </p>
+		<div class="substep" data-order="3">
+		<p>This how reactivity works in most popular reactive tools today, and it's actually how we can force reactiveness to not really reactive architectures</p>
+		<p>This is how we update state in many SPA applications today, e.g. on change we regenerate new HTML, replace with new one, and Make sure old one ready to be garbage collected</p>
+		<p>Still I would call it an emulation of reactive setup, we can do better...</p>
+</div>
 	</aside>
 </section>
 
@@ -225,19 +195,26 @@ console.log(a); // 7</span></code></pre>
 	<div class="content">
 		<h1>How to achieve reactiveness in JS</h1>
 		<h2>2. Introduce observable atomic values</h2>
-		<pre><code>var Observable = require('observable-value');
-var b = new Observable(), c = new Observable();
+		<pre class="substep"><code>var Observable = require('observable-value');
+
+var b = new Observable()
+var c = new Observable();
 var a = b.add(c); // b + c
 
 b.value = 2;
 c.value = 3;
 console.log(a.value); // 5
 
-<span class="substep">b.value = 4;
+<span class="substep" data-order="2">b.value = 4;
 console.log(a.value); // 7</span></code></pre>
 	</div>
 	<aside>
-		<p>.. and from the core work with atomic reactive values</p>
+		<p>We can introduce observable atomic values with dedicated interface</p>
+		<div class="substep" data-order="2">
+			<p>This is as fine grain reactive as we can be, and this observable interface exposes many more methods and functions which allow to construct desired reactive chains.</p>
+			<p>Stil, you may be sceptic, seeing this code, wondering whether it means that such observables should be created manually, it seems as a bit verbose approach</p>
+			<p>Nothing like that, it's more about using utilities that provide such interfaces out of a box and understand them ouf of a box.</p>
+		</div>
 	</aside>
 </section>
 
@@ -265,29 +242,42 @@ exampleForm.oninput = function () {
 		</div>
 	</div>
 	<aside>
-		<p>Such observable objects are perfect match for DOM</p>
+		<p>This is very simple example showing  how we configure views in our work</p>
+		<p>There's a domjs engine which allows to compose DOM view in readable way</p>
+		<p>Objects like <b>a</b>, <b>b</b> or <b>c</b> are usually coming from other utlities, they're not created as observables on a spot</p>
 	</aside>
 </section>
 
-<section data-bespoke-id="reactive-views-more">
+<section id="reactive-views-more" data-bespoke-id="reactive-views-more">
 	<div class="content">
 		<h1>Reactive notation is self-explanatory</h1>
 		<p>Basic example of <i>real world</i> view</p>
-		<pre><code>h1(company._name);
+		<pre><code>h1(company.<mark class="substep" data-order="1">_name</mark>);
 
-_if(not(company._isSubmissionComplete),
-  p("Please complete application"));
+<mark class="substep" data-order="2">_if(not(company._isSubmissionComplete),
+  p("Please complete application"));</mark>
 
-h2(company._name, " Branches:");
+<mark class="substep" data-order="3">h2(company._name, " Branches:");</mark>
+
 // Reactive list:
-ul(company.branches, function (branch) {
+<mark class="substep" data-order="4">ul(company.branches, function (branch) {
   return li(
-    { class: _if(branch._isMain, 'main') },
+    { <mark class="substep" data-order="5">class: _if(branch._isMain, 'main')</mark> },
     h3(branch._name), p(branch._address)
   );
-});</code></pre>
+});</mark></code></pre>
 	</div>
 	<aside>
+		<p>In that example data objects already come with observable interface implied</p>
+		<div class="substep" data-order="1">
+<p><code>company.name</code> returns plain string value, but <code>company._name</code> returns an observable of company's <code>name</code> property.</p>
+		<p><code>_</code> (underscore) choice may feel controversial. Still I prefered that over <code>$</code>. There's also explicit way via <code>getObservable('name')</code>, but using it, would introduce a lot of noise to the templates</p>
+		</div>
+		<p class="substep" data-order="2">There are functions which help compose reactive configurations in straightforward way, e.g. this paragraph, will be included in DOM, only if <code>company.isSubmissionComplete</code> is falsy</p>
+		<p class="substep" data-order="3">Plain text can be mixed with reactive one</p>
+		<p class="substep" data-order="4">There is also reactive list (in that case <code>set</code>) interface, which produces auto updatable behavior</p>
+		<p class="substep" data-order="5">Values for attributes can also be configured reactive way</p>
+		<p class="substep" data-order="6">domjs <a href="https://github.com/medikoo/domjs/blob/master/bin/html-to-domjs">provides an utility</a> that compiles HTML into domjs notation</p>
 	</aside>
 </section>
 
@@ -303,19 +293,20 @@ ul(company.branches, function (branch) {
 	</div>
 	<aside>
 		<p><b>Important to note: They're all use case agnostic</b></p>
-		<p>They're not view specific. On their own they do not provide or depend on any DOM bindings</p>
-		<p>They can also be used to configure <i>viewless</i> reactive configurations in server-side processes</p>
-		<p>With this utitlities you can easily express any mutable data, and compose any reactive setup for whatever purpose</p>
+		<p>On their own they do not provide or depend on any DOM bindings, they can be used to configure viewless reactive configurations in server-side processes</p>
+		<p>With this utitlities you can easily compose any reactive setup for whatever purpose</p>
 	</aside>
 </section>
 
-<section data-bespoke-id="in-memory-database">
+<section id="in-memory-database">
 	<div class="content">
 		<h1>In-Memory Database</h1>
+		<p class="img"><img src="/in-memory-db.svg" width="400" /></p>
 	</div>
 	<aside>
-		<p>Same way as we can cut short view processing, get out of constant serialization and deserialization and setup live in-memory reactive configurations</p>
-		<p>Same way we can be reactive with any other data related processing</p>
+		<p>Views is where reactivity really shines, but the most powerful part of system we're working with is In-Memory Database written in plain JS</p>
+		<p>Persistently our data is stored in representatin of primitive key/value pairs, but it doesn't mean we process our applications data working with that notation</p>
+		<p>On top of that we have an engine, which provides a means to manipulate, filter, search, index the data in probably most natural (for JavaScript language) way you can imagine</p>
 	</aside>
 </section>
 
@@ -336,11 +327,10 @@ ul(company.branches, function (branch) {
 		</div>
 	</div>
 	<aside>
-		<p>Initially it was made for purpose of offline HTML5 application. It was registration system, that presented data in different configurations, tables, filters and provide a mean to search over collected data</p>
-		<p>Over time it grown up to be much more than that. Since then it actually was rewritten from scracth at least twice, to break through some limitations that were approached through more and more expanded uses.</p>
-		<p>What is dbjs really?</p>
-		<p>If I would put it one sentence. I'd say it's a database of events which on a front composes into very familiar object structures. dbjs it's also designed to be as seamless with the langauge as possible</p>
-		<p class="substep" data-order="1">Creating a database instance is like creating new realm for your data</p>
+		<p>Initially (in 2011) it was made for a purpose of offline HTML5 application, a registration system, that presented data in different configurations, tables, filters and provide a mean to search over collected data</p>
+		<p>Over time it grown up to be much more than that, and a lot of work was made to improve its perfomance and desgin. At least twice it was rewritten from scratch.</p>
+		<p>What is dbjs really? If I would have to put it one sentence: <b>It's a database of events which on a front composes into very familiar object structures.</b> dbjs it's also designed to be as seamless with the langauge as possible</p>
+		<p class="substep" data-order="1">Creating a database instance is like creating a new realm for your data.</p>
 	</aside>
 </section>
 
@@ -350,39 +340,18 @@ ul(company.branches, function (branch) {
 		<pre><code>db.String.extend('ShortString',
   { max: { value: 3 } });
 
-db.ShortString('foo'); // foo
-db.ShortString('foobar'); // TypeError
+<span class="substep">db.ShortString('foo'); // foo
+db.ShortString('foobar'); // TypeError</span>
 
-db.String.extend('ZipCode',
+<span class="substep">db.String.extend('ZipCode',
   { pattern: { value: /^\d{2}-\d{3}$/ } })
 
 db.ZipCode('00-801'); // '00-801'
-db.ZipCode('whatever'); // TypeError</code></pre>
+db.ZipCode('whatever'); // TypeError</span></code></pre>
 	</div>
 	<aside>
-		<p>We can extend them to produce any custom type we're after
-	</aside>
-</section>
-
-<section data-bespoke-id="dbjs-object-type">
-	<div class="content">
-		<h3>Object Type: <code>db.Object</code></h3>
-		<pre><code>var obj = db.Object({ foo: 'bar', bar: 34 });
-
-obj.foo; // 'bar'
-Object.keys(obj); // ['foo', 'bar']</code></pre>
-		<h3><code>db.Object</code> is an extension of <code>Map</code> type</h3>
-		<pre><code>obj.set(34, 'Value for 34');
-obj.set(true, 'Value for boolean true');
-obj.set('str', 'Value for str');
-
-// all string keys are exposed as properties
-Object.keys(obj); // ['foo', 'bar', 'str'];
-
-obj.get(true); // 'Value for boolean true'</code></pre>
-	</div>
-	<aside>
-		<p>So it's like a combination of object dictionaries and <code>Map</code> type introduced with ECMAScript 6</p>
+		<p>Any Type can be extended to more custom one</p>
+		<p>Example on right is actually an equivalent of <code>ShortString extends String</code> ES6 classes syntax, and here <code>extend</code> function shares similar signature as <code>Object.create</code> as it accepts descriptors for properties. It's however about dbjs (no ES5) level descriptors that describe meta characteristics of given property</p>
 	</aside>
 </section>
 
@@ -393,6 +362,7 @@ obj.get(true); // 'Value for boolean true'</code></pre>
 
 obj.foo; // 'bar'
 Object.keys(obj); // ['foo', 'bar']</code></pre>
+<div class="substep" data-order="1">
 		<h3><code>db.Object</code> is an extension of <code>Map</code> type</h3>
 		<pre><code>obj.set(34, 'Value for 34');
 obj.set(true, 'Value for boolean true');
@@ -400,11 +370,17 @@ obj.set('str', 'Value for str');
 
 obj.get(true); // 'Value for boolean true'</code></pre>
 
+</div>
+<div class="substep" data-order="2">
 <p>All string keys are exposed as enumerable properties</p>
 <pre><code>Object.keys(obj); // ['foo', 'bar', 'str'];</code></pre>
+</div>
 	</div>
 	<aside>
-		<p>So it's like a combination of object dictionaries and <code>Map</code> type introduced with ECMAScript 6</p>
+<p>There's of course object type</p>
+<p>It may seem to work exactly as native JS constructor, but there's of course significant difference. With very simple (behind a scene) setup, all those operations can easily be saved and restored, but we'll get to that later</p>
+<p class="substep" data-order="1">Objects are a combinations of object dictionaries and instances of <code>Map</code> (type introduced with ECMAScript 6)</p>
+<p class="substep" data-order="2">Turning it around we can say it's a map with all string keys exposed as object properties</p>
 	</aside>
 </section>
 
@@ -412,47 +388,61 @@ obj.get(true); // 'Value for boolean true'</code></pre>
 	<div class="content">
 		<h3>Object extensions</h3>
 		<pre><code>db.Object.extend('Person', {
-  firstName: { type: db.String },
-  lastName: { type: db.String },
+  <mark class="substep" data-order="1">firstName: { type: db.String, required: true },
+  lastName: { type: db.String, required: true },
   fullName: { type: db.String,
-    value: function () {
+    value: <mark class="substep" data-order="2">function () {
       return this.firstName + " " + this.lastName;
-    }
-  }
+    }</mark>
+  }</mark>
 });
 
-var john = new Person({ firstName: "John",
+<span class="substep" data-order="3">var john = new db.Person({ firstName: "John",
   lastName: "Smith" });
 
-john.fullName; // "John Smith"</code></pre>
+john.fullName; // "John Smith"</span></code></pre>
 	</div>
-	<aside></aside>
+	<aside>
+	<p>Via Object type extensions we can define classes with which we model our application data</p>
+	<p class="substep" data-order="1">We define our data with descriptors of meta characteristics</p>
+<div class="substep" data-order="2">
+	<p>We can also define dynamic properties. They do not need any other handling to work as expected. dbjs internally uses <a href="https://github.com/medikoo/esniff">esniff</a> low footprint ECMAScript parser, and knows on which properties this property depends. In case of more complex dependency setup, that can't be reliably statically parsed, you can make use of <code>_observe</code> registration function, provided as first arguments, and call it wih any observable which value affects the result.</p>
+	<p>Dynamic property can depend on other dynamic properties, it's one of the most powerful aspects of this engine.</p>
+	<p class="substep" data-order="3">Instances can be created in a way you can guess. If you wonder, <code>new</code> keyword is optional</p>
+</div>
+</aside>
 </section>
 
 <section data-bespoke-id="dbjs-object-extensions-2">
 	<div class="content">
 		<h3>Object extensions #2</h3>
+		<p>More sophisticated example</p>
 		<pre><code>db.Person.extend('Patient',
   { birthDate: { type: db.DateTime } });
 
 db.Person.extend('Doctor', { patients:
-  { type: db.Patient, multiple: true,
-    reverse: 'doctor', unique: true } });
+  { type: db.Patient, <mark class="substep" data-order="1">multiple: true</mark>,
+   <mark class="substep" data-order="3">reverse: 'doctor'</mark>, <mark class="substep" data-order="2">unique: true</mark> } });
 
-var doc = new db.Doctor({ firstName: "Gregory",
+<span class="substep" data-order="4">var drHouse = new db.Doctor({ firstName: "Gregory",
   lastName: "House" });
 
 var henry = new db.Patient({ firstName: "Henry",
   lastName: "Smith",
   birthDate: new Date(1977, 0, 3) });
 
-doc.patients.add(henry);
-john.doctor; // doc</code></pre>
+drHouse.patients.add(henry);
+john.doctor; // drHouse</span></code></pre>
 	</div>
-	<aside></aside>
+	<aside>
+	<p class="substep" data-order="1">We can of course define multiple property values. They'll be represented with sets. It's worth to note here, that dbjs handles two types of collection values <code>map</code> and <code>set</code>, and mentioned before atomic primitive values, which can represent any key or value of a map, or be part of a set</p>
+	<p class="substep" data-order="2">We can assure uniqueness of property values. Here it means that whenever we try to assign a patient to a second doctor exception will be thrown.</p>
+	<p class="substep" data-order="3">In case of object to object relations, we can define to have property holder exposed at it's value object. In this example doctor, to which patient was assigned will be also revealed at <code>doctor</code> property on patient.</p>
+	<p class="substep" data-order="4">Still, it's not everything, in this presentation I introduce features very selectively, there are many things I'm not able to cover in this short run</p>
+</aside>
 </section>
 
-<section data-bespoke-id="dbjs-object-extensions-2">
+<section data-bespoke-id="reactive-meta">
 	<div class="content">
 		<h3>Meta configurations are reactive</h3>
 		<pre><code>var birthDateDesc = db.Patient.prototype
@@ -463,86 +453,105 @@ john.birthDate;             // [Date 1977, 0, 3]
 birthDateDesc.type = db.Number;
 john.birthDate;             // 221094000000
 
-birthDateDesc.type = db.DateTime;
-john.birthDate;             // [Date 1977, 0, 3]</code></pre>
+<span class="substep" data-order="1">birthDateDesc.type = db.DateTime;
+john.birthDate;             // [Date 1977, 0, 3]</span></code></pre>
 	</div>
-	<aside></aside>
+	<aside>
+<p>At any time we can take the descriptor of any property, change chosen characteristics and it will have instant impact on the data</p>
+<p class="substep" data-order="1">Still it's not destructive for the data. Assigning back previous value will bring back previous state</p>
+</aside>
 </section>
 
 <section data-bespoke-id="dbjs-serialization">
 	<div class="content">
 		<h3>Serialization for persistent layer</h3>
-<div class="log">
-<table class="serialize-log"><thead><tr><th>key</th><th>value</th></tr></thead>
-<tr><td>ShortString</td><td>7String</td></tr>
-<tr><td>ShortString/min</td><td>23</td></tr>
-<tr><td>ZipCode</td><td>7String</td></tr>
-<tr><td>ZipCode/pattern</td><td>5/^\d{2}-\d{3}$/</td></tr>
-<tr><td>9ec9sry5t1y</td><td>7Object</td></tr>
-<tr><td>9ec9sry5t1y/foo</td><td>3bar</td></tr>
-<tr><td>9ec9sry5t1y/bar</td><td>234</td></tr>
-<tr><td>9ec9sry5t1y/234</td><td>3Value for 34</td></tr>
-<tr><td>9ec9sry5t1y/11</td><td>3Value for boolean true</td></tr>
-<tr><td>9ec9sry5t1y/str</td><td>3Value for str</td></tr>
-<tr><td>Person</td><td>7Object</td></tr>
-<tr><td>Person#/firstName$type</td><td>7String</td></tr>
-<tr><td>Person#/lastName$type</td><td>7String</td></tr>
-<tr><td>Person#/fullName$type</td><td>7String</td></tr>
-<tr><td>Person#/fullName</td><td>6function () { this.firstName + \" \" + this.lastName; }</td></tr>
-<tr><td>9ec9sv007hy</td><td>Person#</td></tr>
-<tr><td>9ec9sv007hy/firstName</td><td>3John</td></tr>
-<tr><td>9ec9sv007hy/lastName</td><td>3Smith</td></tr>
-<tr><td>Patient</td><td>7Person</td></tr>
-<tr><td>Patient#/birthDate$type</td><td>7DateTime</td></tr>
-<tr><td>Doctor</td><td>7Doctor</td></tr>
-<tr><td>Doctor#/patients$type</td><td>7Patient</td></tr>
-<tr><td>Doctor#/patients$multiple</td><td>11</td></tr>
-<tr><td>Doctor#/patients$reverse</td><td>3doctor</td></tr>
-<tr><td>Doctor#/patients$unique</td><td>11</td></tr>
-<tr><td>Doctor#/patients$unique</td><td>11</td></tr>
-<tr><td>9ec9tid0nny</td><td>7Doctor</td></tr>
-<tr><td>9ec9tid0nny/firstName</td><td>3Gregory</td></tr>
-<tr><td>9ec9tid0nny/LastName</td><td>3House</td></tr>
-<tr><td>9ec9ysqy0ry</td><td>7Patient</td></tr>
-<tr><td>9ec9ysqy0r/firstName</td><td>3Henry</td></tr>
-<tr><td>9ec9ysqy0r/lastName</td><td>3Smith</td></tr>
-<tr><td>9ec9ysqy0r/birthDate</td><td>4221094000000</td></tr>
-<tr><td>9ec9tid0nny/patients*79ec9ysqy0r</td><td>11</td></tr>
-<tr><td>Patient#/birthDate$type</td><td>7Number</td></tr>
-<tr><td>Patient#/birthDate$type</td><td>7DateTime</td></tr>
+<div class="log substep" data-order="1">
+<table class="serialize-log substep" data-action="class" data-order="2" data-names="key-row object-id meta value-type ev-1 ev-2 ev-3 ev-4 ev-5 ev-all"><thead><tr><th>key</th><th>value</th></tr></thead>
+<tr><td>ShortString</td><td><span class="type">7</span>String</td></tr>
+<tr class="ev-5"><td>ShortString/min</td><td><span class="type">2</span>3</td></tr>
+<tr class="ev-2"><td>ZipCode</td><td><span class="type">7</span>String</td></tr>
+<tr clas><td>ZipCode/pattern</td><td><span class="type">5</span>/^\d{2}-\d{3}$/</td></tr>
+<tr class="object ev-4"><td>9ec9sry5t1y</td><td><span class="type">7</span>Object</td></tr>
+<tr class="object"><td>9ec9sry5t1y/foo</td><td><span class="type">3</span>bar</td></tr>
+<tr class="object"><td>9ec9sry5t1y/bar</td><td><span class="type">2</span>34</td></tr>
+<tr class="object ev-1"><td>9ec9sry5t1y/234</td><td><span class="type">3</span>Value for 34</td></tr>
+<tr class="object ev-3"><td>9ec9sry5t1y/11</td><td><span class="type">3</span>Value for boolean true</td></tr>
+<tr class="object"><td>9ec9sry5t1y/str</td><td><span class="type">3</span>Value for str</td></tr>
+<tr><td>Person</td><td><span class="type">7</span>Object</td></tr>
+<tr class="meta"><td>Person#/firstName$type</td><td><span class="type">7</span>String</td></tr>
+<tr class="meta"><td>Person#/lastName$type</td><td><span class="type">7</span>String</td></tr>
+<tr class="meta"><td>Person#/fullName$type</td><td><span class="type">7</span>String</td></tr>
+<tr><td>Person#/fullName</td><td><span class="type">6</span>function () { this.firstName + \" \" + this.lastName; }</td></tr>
+<tr><td>9ec9sv007hy</td><td><span class="type">7</span>Person#</td></tr>
+<tr><td>9ec9sv007hy/firstName</td><td><span class="type">3</span>John</td></tr>
+<tr><td>9ec9sv007hy/lastName</td><td><span class="type">3</span>Smith</td></tr>
+<tr><td>Patient</td><td><span class="type">7</span>Person</td></tr>
+<tr><td>Patient#/birthDate$type</td><td><span class="type">7</span>DateTime</td></tr>
+<tr><td>Doctor</td><td><span class="type">7</span>Person</td></tr>
+<tr><td>Doctor#/patients$type</td><td><span class="type">7</span>Patient</td></tr>
+<tr><td>Doctor#/patients$multiple</td><td><span class="type">1</span>1</td></tr>
+<tr><td>Doctor#/patients$reverse</td><td><span class="type">3</span>doctor</td></tr>
+<tr><td>Doctor#/patients$unique</td><td><span class="type">1</span>1</td></tr>
+<tr><td>Doctor#/patients$unique</td><td><span class="type">1</span>1</td></tr>
+<tr class="object"><td>9ec9tid0nny</td><td><span class="type">7</span>Doctor</td></tr>
+<tr class="object"><td>9ec9tid0nny/firstName</td><td><span class="type">3</span>Gregory</td></tr>
+<tr class="object"><td>9ec9tid0nny/LastName</td><td><span class="type">3</span>House</td></tr>
+<tr class="object"><td>9ec9ysqy0ry</td><td><span class="type">7</span>Patient</td></tr>
+<tr class="object"><td>9ec9ysqy0r/firstName</td><td><span class="type">3</span>Henry</td></tr>
+<tr class="object"><td>9ec9ysqy0r/lastName</td><td><span class="type">3</span>Smith</td></tr>
+<tr class="object"><td>9ec9ysqy0r/birthDate</td><td><span class="type">4</span>221094000000</td></tr>
+<tr class="object"><td>9ec9tid0nny/patients*79ec9ysqy0r</td><td><span class="type">1</span>1</td></tr>
+<tr class="meta"><td>Patient#/birthDate$type</td><td><span class="type">7</span>Number</td></tr>
+<tr class="meta"><td>Patient#/birthDate$type</td><td><span class="type">7</span>DateTime</td></tr>
 </tbody></table>
 	</div>
 </div>
 	<aside>
-<p>It's not shown in this table, but each update is of course marked with a timestamp (of microseconds accuracy), additionally each atomic update has guaranteed unique timestamp</p>
-<p>Timestamps generation is also designed so multiple updates coming from same single action can easily be distniguished</p>
-<p>Newly crated object are marked with universally unique identifiers. It's based on current microtime stamp and random string, and stringified to form as <i>9ec9sry5t1y</i>. Its uniqueness might not as strong as of standardized UUID, but it's suffient for average web applications, and it's much more human readbale</p>
-<p>Other interesting thing, those events can be unserialized in any order to restore the state, e.g. we can restore properties on an instances, before knowing what is the type of it.</p>
+<p>So, how all those changes are represented for persistent layer (?)</p>
+<div class="substep" data-order="1">
+<p>In a table there's a representation of al updates that I did in previous examples. It's not shown in this table, but each update is marked with a unique timestamp of microseconds accuracy. Directly we of course never work with this notation</p>
+<p class="substep" data-order="2">Key column represents ids of entities that were updated.</p>
+<p class="substep" data-order="2.001">Newly crated object are marked with universally unique identifiers. It's based on current microseconds timestamp and random string</p>
+<p class="substep" data-order="2.002">Meta (descriptor) properties are identified with <code>$</code></p>
+<p class="substep" data-order="2.003">First character of serialized value tells us what is it.</p>
+<p class="substep" data-order="2.004">On reinitialization those events can be unserialized in any order to restore the state</p>
+</div>
 </aside>
 </section>
 
 <section data-bespoke-id="dbjs-demo">
 	<div class="content">
-		<h1>dbjs demo</h1>
+		<h1>dbjs basic demo</h1>
 		<div id="dbjs-example"></div>
 		<p>See <a href="https://github.com/medikoo/domjs#domjs">client/examples/reactive-dom.js</a></p>
 	</div>
-	<aside></aside>
+	<aside>
+		<p>Simple demo showing how log of events is filled as we manipulate the data</p>
+	</aside>
 </section>
 
 <section data-bespoke-id="real-app-demo">
 	<div class="content">
-		<h1>Real world application build on top of dbjs: <a href="http://elomas.gob.ar/">elomas.gob.ar</a></h1>
+		<h1>Real application demo<br /> <a href="http://elomas.gob.ar/">elomas.gob.ar</a></h1>
 	</div>
-	<aside></aside>
+	<aside>
+		<p>Application helps citizens of Lomas de Zamora (province of Buenos Aires) to register the business</p>
+		<p>Whole application model is defined with help of dbjs engine. It's complex, <b>model definition covers over 12 000 properties</b>.</p>
+		<p>Each view is configured reactive way with help of domjs. Apart of exceptions of few static pages of public website, it's all <b>pure direct DOM generation, with no innerHTML involved</b></p>
+		<p>There's a <a href="http://elomas.gob.ar/simulation/">simulation page</a> where you can see demo of a initial form visible to registered user. Based on area in which business activity would be pursued and other business characteristics it is decided what would be the cost of registration, what conditions have to be met and which documents are required by applicant for successfully registration</p>
+		<p>Most of meta data involved in this decision making, can be edited in special administration panel, described e.g. here <a href="http://elomas.gob.ar/ayuda-datos/control-de-uso-de-suelo/">Example 1</a> <a href="http://elomas.gob.ar/ayuda-datos/control-de-seguridad-e-higiene/">Example 2</a>, <a href="http://elomas.gob.ar/ayuda-datos/cruce-actividades-determinantes/">Example 3</a>. Changes made in those panels do not require restart of a server, they immediatelly affect the state of the data.</p>
+	</aside>
 </section>
 
 <section data-bespoke-id="reactive-architecture">
 	<div class="content">
-		<h1>Reactive architecture diagram</h1>
+		<h1><a href="http://elomas.gob.ar/">elomas.gob.ar</a> architecture</h1>
 		<p class="img"><img id="architecture" src="/architecture.png" /></p>
 	</div>
-	<aside></aside>
+	<aside>
+		<p>Modern client is nearly self efficient process. Needed databse content is replicated from server by Access Control logic which knows which data is expected on a client, then it w</p>
+		<p>Few of the presented components are still in development, e.g. you can notice, that we use same presenter logic as on client side to produce static HTML pages to legacy engines. All our views where from the beginning written with this in mind. I hoped we'll have that feature complete for Front-Trends, but we're still need some time for that.</p>
+	</aside>
 </section>
 
 

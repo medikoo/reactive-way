@@ -204,19 +204,58 @@ a, a:link {
 
 mark {
   padding: 0;
-  background: rgba(255, 255, 255, 0.2);
-  color: inherit;
+	background: rgba(255, 255, 0, 0.3);
 }
 
 div.log {
 	overflow: auto;
 	height: 500px;
 }
+table.serialize-log th {
+	width: 350px;
+}
 table.serialize-log th, table.serialize-log td {
 	padding: 5px;
 	text-align: left;
 	font-size: 20px;
 	color: #444;
+}
+table.key-row td + td, table.key-row th + th,
+table.object-id td + td, table.object-id th + th,
+table.meta td + td, table.meta th + th {
+	opacity: 0.2;
+}
+
+table.object-id tr.object td:first-child {
+	font-weight: bold;
+}
+
+table.meta tr.meta td:first-child {
+	font-weight: bold;
+}
+
+table.value-type td:first-child, table.value-type th:first-child {
+	opacity: 0.2;
+}
+
+table.value-type span.type {
+	font-weight: bold;
+}
+
+table.ev-1 tr:not(.ev-1) {
+	opacity: 0.1;
+}
+table.ev-2 tr:not(.ev-1):not(.ev-2) {
+	opacity: 0.1;
+}
+table.ev-3 tr:not(.ev-1):not(.ev-2):not(.ev-3) {
+	opacity: 0.1;
+}
+table.ev-4 tr:not(.ev-1):not(.ev-2):not(.ev-3):not(.ev-4) {
+	opacity: 0.1;
+}
+table.ev-5 tr:not(.ev-1):not(.ev-2):not(.ev-3):not(.ev-4):not(.ev-5) {
+	opacity: 0.1;
 }
 
 div#cover div.links {
@@ -250,6 +289,10 @@ div#dbjs-example th, div#dbjs-example td {
 	overflow: hidden;
 }
 
+section#in-memory-database img {
+	opacity: 0.2;
+}
+
 div#dbjs-example th:nth-child(1), div#dbjs-example td:nth-child(1) {
 	width: 200px;
 }
@@ -267,6 +310,9 @@ div#dbjs-example input, div#dbjs-example button {
 }
 .hidden {
 	display: none;
+}
+section#reactive-views-more h1 {
+	font-size: 70px;
 }
 div#dbjs-example > div > div {
 	height: 200px;
