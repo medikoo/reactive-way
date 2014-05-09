@@ -125,7 +125,7 @@
 		text, element, insert, normalize, _if, and, browser, eq, eqSome, field, gt,
 		gtOrEq, html, legacy, list, lt, ltOrEq, mmap, modal, not, or, postButton,
 		resolve, stUrl, thumb, uploadButton, url) {
-		require.modulesAPPLICATION_NAME.client.view = TEMPLATE_MODULES;
+		require.modulesAPPLICATION_NAME.client.examples = TEMPLATE_MODULES;
 	}(ns.a, ns.abbr, ns.address, ns.area, ns.article, ns.aside, ns.audio, ns.b,
 		ns.bdi, ns.bdo, ns.blockquote, ns.br, ns.button, ns.canvas, ns.caption,
 		ns.cite, ns.code, ns.col, ns.colgroup, ns.command, ns.datalist, ns.dd,

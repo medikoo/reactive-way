@@ -257,7 +257,7 @@ pre span {
 	height: 600px;
 	margin-top: -300px;
 	margin-left: -400px;
-	outline: 1px solid rgba(255,0,0, 0.1);
+	//outline: 1px solid rgba(255,0,0, 0.1);
 }
 .bespoke-slide > div.content, .bespoke-slide > aside {
 	width: 760px;

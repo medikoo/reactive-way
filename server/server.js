@@ -13,7 +13,7 @@ var endsWith     = require('es5-ext/string/#/ends-with')
 
   , staticsPath = resolve(__dirname, '../public')
   , programPath = resolve(__dirname, '../client/index.js')
-  , tplsPath = resolve(__dirname, '../client/view')
+  , tplsPath = resolve(__dirname, '../client/examples')
   , readIndex;
 
 readIndex = function (root) {

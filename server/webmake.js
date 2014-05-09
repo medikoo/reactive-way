@@ -31,9 +31,9 @@ module.exports = exports = function (programPath, tplsPath, cb) {
 			.replace('APPLICATION_NAME', '[' + stringify(appPath[0]) + ']');
 		appModules = parser.modules;
 		appModules = appModules[appPath[0]].client;
-		tpls = appModules.view;
+		tpls = appModules.examples;
 		if (!tpls) throw customError("Missing templates", 'NO_TEMPLATES');
-		delete appModules.view;
+		delete appModules.examples;
 		index = src.indexOf('INIT_MODULES');
 		src = src.slice(0, index) + parser.toString() +
 			src.slice(index + 'INIT_MODULES'.length);

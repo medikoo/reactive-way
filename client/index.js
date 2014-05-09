@@ -57,17 +57,17 @@ require('./lib/preload-images');
 // Initialize examples
 require('./lib/observable-dom');
 document.getElementById('domjs-example')
-	.appendChild(require('./view/reactive-dom')());
+	.appendChild(require('./examples/domjs')());
 document.getElementById('dbjs-example')
-	.appendChild(require('./view/dbjs')());
+	.appendChild(require('./examples/dbjs')());
 
 // Log total number of slides
 console.log("Total slides:", container.children.length);
-if (env.dev) {
-	countP = document.body.appendChild(document.createElement('p'));
-	countP.style.position = 'absolute';
-	countP.style.fontSize = '16px';
-	countP.style.bottom = '20px';
-	countP.style.right = '20px';
-	countP.innerHTML = "[" + container.children.length + "]";
-}
+// if (env.dev) {
+// 	countP = document.body.appendChild(document.createElement('p'));
+// 	countP.style.position = 'absolute';
+// 	countP.style.fontSize = '16px';
+// 	countP.style.bottom = '20px';
+// 	countP.style.right = '20px';
+// 	countP.innerHTML = "[" + container.children.length + "]";
+// }

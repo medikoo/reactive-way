@@ -13,11 +13,9 @@
 	</div>
 
 	<aside>
-<p>Today I'll provide an insight into web applications reactive architecture, that I use at my work.</p>
+<p>Insight into few concepts of reactive web applications architecture, with which we deliver egovernment solutions (full-stack JS, HTML5) to citizens in various parts of the world.</p>
 
-<p>I'm part of a team of consultants that help UNCTAD deliver egovernment solutions (full-stack JS, HTML5) to citizens in various parts of the world.</p>
-
-<p>At the end of my speech I will showcase application that we recently released and which I hope make company registration process in Buenos Aires area easier.</p>
+<p>At the end of my speech I will showcase application that we recently released and which we hope make company registration process in Buenos Aires area easier.</p>
 		<hr />
 		<p>Made with <a href="http://markdalgleish.com/projects/bespoke.js/">Bespoke.js</a> engine developed by <a href="https://twitter.com/markdalgleish">Mark Dalgleish</a></p>
 		<p>See <a href="https://github.com/medikoo/reactive-way">Github</a> for a source code of this presentation, and instructions on how to run it locally</p>
@@ -30,11 +28,10 @@
 <section data-bespoke-id="fusion-reactor">
 	<div class="content"><a href="https://twitter.com/mraleph/statuses/411549064787152896" target="_blank"><img src="/mraleph.png" width="500" /></a></div>
 	<aside>
-<p>To those who don't know, Vyacheslav was part of a team working on V8 JavaScript engine, which is being used in Google Chrome</p>
-<p>Currently Vyacheslav is involved into development of Dart and in JavaScript world his opinions are not the ones that are most popular, but I think in that he made really important point in that tweet</p>
+		<p>Mr Vyacheslav made really a valid point in that tweet</p>
 		<p>The way we build web applications of today in many cases do not touch the potential that modern engines have to offer</p>
-		<p>Popular frameworks are still prisoners of support of ES3 based engines. We waste a lot of time on micro-optimizations and we like to repeat the patterns with which we developed web applications 5, 10 even 15 years ago, as this is what we're familiar with and safe with</p>
-		<p>Sometimes it seems that we didn't notice now drastically hardware that runs our apps improved, and that todays browsers are very different beasts then one we've dealt with years ago.</p>
+		<p>Popular frameworks are still prisoners of support of ES3 based engines.</p>
+		<p>Additionally we waste a lot of time on micro-optimizations and we tend to repeat the patterns with which we developed web applications 5, 10 even 15 years ago</p>
 	</aside>
 </section>
 <section data-bespoke-id="web-architecture">
@@ -43,9 +40,9 @@
 		<img class="diagram" src="/web-app-architecture.png" width="500" />
 	</div>
 	<aside>
-		<p>Before I'll get into raw meat, I'd like us to have a quick and very general overview of how we deliver applications.</p>
+		<p>Before I'll get into raw meat, let's have a quick and very general overview of how we deliver applications.</p>
 		<p>We can distinguish three important components:</p>
-		<p>A persistent storage for all the data, a server which runs business logic, responds do requests, delivers the interface, and of course a client right in front of a consumer of application</p>
+		<p>A persistent storage for all the data, a server which runs business logic, responds do requests, delivers the interface, and a client right in front of a consumer of application</p>
 	</aside>
 </section>
 
@@ -65,8 +62,6 @@
 		</ul>
 	</div>
 	<aside>
-		<p>What was the role of those components not that long ago (?)</p>
-	</div>
 	</aside>
 </section>
 
@@ -76,9 +71,7 @@
 		<p class="img"><img src="/serialize-unserialize.png" width="500" /></p>
 	</div>
 	<aside>
-		<p>Delivery of applications involved constant and repeated data transformations</p>
-		<p>Typical request handling looked that, when request came from a client, CGI or PHP script was reevaluted, this script <i>unserialized</i> data from physical storage, produced expected response and it was gracefully killed.</p>
-		<p>Exactly same loop was repated on another request and so on, so on</p>
+		<p>Delivery of applications involved repeated data transformations through various layers</p>
 	</aside>
 </section>
 
@@ -87,7 +80,7 @@
 		<h2>Today</h2>
 		<h3>Client browser</h3>
 		<ul>
-			<li>Host of <b>complete applications</b></li>
+			<li>Host of <b>desktop-like</b> applications</b></li>
 		</ul>
 		<h3>Server</h3>
 		<ul>
@@ -95,7 +88,6 @@
 		</ul>
 	</div>
 	<aside>
-		<p>Today with Node.js, we not only have light process that's server of an application but it also can be a process that handles business logic of our application, and it's not we that reinitialize that process on each request.</p>
 	</aside>
 </section>
 
@@ -104,9 +96,7 @@
 		<p class="img"><img src="/serialize-unserialize-today.png" width="750" /></p>
 	</div>
 	<aside>
-		<p>Still quite often we try to deliver applications repeating same patterns we learned to work with over a decade ago</p>
-		<p>e.g. in SPA applications we generate HTML strings, inject it via innerHTML, then search for created elements with some querySelector mechanism to provide additional behaviors.. and all of that happenswithin same, one memory process</p>
-		<p>Same with databases, if we think of replicating some logic that was handled by database storage on server, we assume we need to bring some SQL or other <i>external</i> language to be able to process our data efficiently</p>
+		<p>While we noticed the potential, still quite often we repeat same patterns of website delivery</p>
 	</aside>
 </section>
 
@@ -116,10 +106,8 @@
 		<p class="img"><img src="/modern-client.png" width="600" /></p>
 	</div>
 	<aside>
-		<p>What if we'll try to unify our architecture in that <b>one</b> process</p>
-		<p>We can create DOM directly, and omit serialize/unserialize HTML step</p>
-		<p>But it's not only about how we generate views. We can also take most of relational data handling logic step (one that usually was part of database engine, like SQL) to be a part of our process, and leave persistent layer just with primitive key/value forms</p>
-<p>Technically we can make our application process to be a living organism, that works with the rules we defined for it<p>
+		<p>Maybe we can reduce number of involved transformations (?)</p>
+		<p>Maybe we can make much better use of (much more capable and much more powerful) application process we have now (?)</p>
 	</aside>
 </section>
 
@@ -129,10 +117,8 @@
 		<p class="img"><img src="/reactor.png" width="256" /></p>
 	</div>
 	<aside>
-		<p>When you start to think and work that way, you instinctively get into reactive programming</p>
+		<p>When we start to think and work that way, we instinctively get into reactive programming</p>
 		<p><b>What is reactive programming?</b></p>
-		<p>To clarify I'm not going to talk about Facebook's React, or any other popular stack with "reactive" in its name that recently emerged</p>
-		<p>Let's talk about Reactive in simplest, purest form with no framework noise</p>
 	</aside>
 </section>
 
@@ -142,7 +128,6 @@
 		<p class="img"><img src="/spreadsheet.gif" width="400" /></p>
 	</div>
 	<aside>
-		<p>Reactive programming is about assuring bindings between our mutable data, transparantly behind the scenes</p>
 	</aside>
 </section>
 
@@ -178,7 +163,7 @@ console.log(a); // 7</span></code></pre>
 	<aside>
 		<div class="substep" data-order="3">
 		<p>This how reactivity works in most popular reactive tools today, and it's actually how we can force reactiveness to not really reactive architectures</p>
-		<p>This is how we update state in many SPA applications today, e.g. on change we regenerate new HTML, replace with new one, and Make sure old one ready to be garbage collected</p>
+		<p>This is how we update state in many SPA applications today, e.g. on change we regenerate new HTML, replace with new one, and make sure old one ready to be garbage collected</p>
 		<p>Still I would call it an emulation of reactive setup, we can do better...</p>
 </div>
 	</aside>
@@ -202,18 +187,12 @@ console.log(a.value); // 5
 console.log(a.value); // 7</span></code></pre>
 	</div>
 	<aside>
-		<p>We can introduce observable atomic values with dedicated interface</p>
-		<div class="substep" data-order="2">
-			<p>This is as fine grain reactive as we can be, and this observable interface exposes many more methods and functions which allow to construct desired reactive chains.</p>
-			<p>Stil, you may be sceptic, seeing this code, wondering whether it means that such observables should be created manually, it seems as a bit verbose approach</p>
-			<p>Nothing like that, it's more about using utilities that provide such interfaces out of a box and understand them ouf of a box.</p>
-		</div>
 	</aside>
 </section>
 
 <section data-bespoke-id="reactive-views">
 	<div class="content">
-		<h1>DOM is a perfect match</h1>
+		<h1>Reactive DOM</h1>
 		<p>Below with help of <a href="https://github.com/medikoo/domjs#domjs">github.com/medikoo/domjs</a></p>
 		<div style="min-height:350px">
 			<div class="substep" data-action="remove" data-order="1">
@@ -235,9 +214,8 @@ exampleForm.oninput = function () {
 		</div>
 	</div>
 	<aside>
-		<p>This is very simple example showing  how we configure views in our work</p>
-		<p>There's a domjs engine which allows to compose DOM view in readable way</p>
-		<p>Objects like <b>a</b>, <b>b</b> or <b>c</b> are usually coming from other utlities, they're not created as observables on a spot</p>
+		<p>It's a very basic example showing how we configure templates for our application</p>
+		<p>Objects like <b>a</b>, <b>b</b> or <b>c</b> are usually provided by other utlities out of a box, they're not created as observables on a spot</p>
 	</aside>
 </section>
 
@@ -261,7 +239,7 @@ exampleForm.oninput = function () {
 });</mark></code></pre>
 	</div>
 	<aside>
-		<p>In that example data objects already come with observable interface implied</p>
+		<p>In that example data objects already come with observable interface implied and are provided by <a href="https://github.com/medikoo/dbjs">dbjs</a> engine, which I'll talk about in next slides</p>
 		<div class="substep" data-order="1">
 <p><code>company.name</code> returns plain string value, but <code>company._name</code> returns an observable of company's <code>name</code> property.</p>
 		<p><code>_</code> (underscore) choice may feel controversial. Still I prefered that over <code>$</code>. There's also explicit way via <code>getObservable('name')</code>, but using it, would introduce a lot of noise to the templates</p>
@@ -270,7 +248,7 @@ exampleForm.oninput = function () {
 		<p class="substep" data-order="3">Plain text can be mixed with reactive one</p>
 		<p class="substep" data-order="4">There is also reactive list (in that case <code>set</code>) interface, which produces auto updatable behavior</p>
 		<p class="substep" data-order="5">Values for attributes can also be configured reactive way</p>
-		<p class="substep" data-order="6">domjs <a href="https://github.com/medikoo/domjs/blob/master/bin/html-to-domjs">provides an utility</a> that compiles HTML into domjs notation</p>
+		<p class="substep" data-order="6">domjs <a href="https://github.com/medikoo/domjs/blob/master/bin/html-to-domjs">provides an utility</a> that compiles plain HTML into domjs notation</p>
 	</aside>
 </section>
 
@@ -320,9 +298,7 @@ exampleForm.oninput = function () {
 		</div>
 	</div>
 	<aside>
-		<p>Initially (in 2011) it was made for a purpose of offline HTML5 application, a registration system, that presented data in different configurations, tables, filters and provide a mean to search over collected data</p>
-		<p>Over time it grown up to be much more than that, and a lot of work was made to improve its perfomance and desgin. At least twice it was rewritten from scratch.</p>
-		<p>What is dbjs really? If I would have to put it one sentence: <b>It's a database of events which on a front composes into very familiar object structures.</b> dbjs it's also designed to be as seamless with the langauge as possible</p>
+		<p>What is dbjs really? If I would have to put it one sentence: <b>It's a database of events which on a front composes into familiar language structures.</b> dbjs it's also designed to be as seamless with the langauge as possible</p>
 		<p class="substep" data-order="1">Creating a database instance is like creating a new realm for your data.</p>
 	</aside>
 </section>
@@ -370,8 +346,7 @@ obj.get(true); // 'Value for boolean true'</code></pre>
 </div>
 	</div>
 	<aside>
-<p>There's of course object type</p>
-<p>It may seem to work exactly as native JS constructor, but there's of course significant difference. With very simple (behind a scene) setup, all those operations can easily be saved and restored, but we'll get to that later</p>
+<p>There's Object type, it may seem to work exactly as native JS constructor, but there's of course significant difference. With very simple (behind a scenes) setup, all those operations can easily be saved and restored, but we'll get to that later</p>
 <p class="substep" data-order="1">Objects are a combinations of object dictionaries and instances of <code>Map</code> (type introduced with ECMAScript 6)</p>
 <p class="substep" data-order="2">Turning it around we can say it's a map with all string keys exposed as object properties</p>
 	</aside>
@@ -396,11 +371,11 @@ obj.get(true); // 'Value for boolean true'</code></pre>
 john.fullName; // "John Smith"</span></code></pre>
 	</div>
 	<aside>
-	<p>Via Object type extensions we can define classes with which we model our application data</p>
+	<p>To define classes with which we model our application data, we extend Object type</p>
 	<p class="substep" data-order="1">We define our data with descriptors of meta characteristics</p>
 <div class="substep" data-order="2">
-	<p>We can also define dynamic properties. They do not need any other handling to work as expected. dbjs internally uses <a href="https://github.com/medikoo/esniff">esniff</a> low footprint ECMAScript parser, and knows on which properties this property depends. In case of more complex dependency setup, that can't be reliably statically parsed, you can make use of <code>_observe</code> registration function, provided as first arguments, and call it wih any observable which value affects the result.</p>
-	<p>Dynamic property can depend on other dynamic properties, it's one of the most powerful aspects of this engine.</p>
+	<p>We can also define dynamic properties. They do not need any other handling to work as expected. dbjs internally uses <a href="https://github.com/medikoo/esniff">esniff</a> low footprint ECMAScript parser, and knows on which properties this property depends. In case of more complex dependency setup, that can't be reliably statically parsed, you can make use of <code>_observe</code> registration function, provided as first argument, and call it wih any observable which value affects the result.</p>
+	<p>Dynamic property can depend on other dynamic properties, and can also generate dynamic collections (set), it's one of the most powerful aspects of this engine.</p>
 	<p class="substep" data-order="3">Instances can be created in a way you can guess. If you wonder, <code>new</code> keyword is optional</p>
 </div>
 </aside>
@@ -428,10 +403,9 @@ drHouse.patients.add(henry);
 john.doctor; // drHouse</span></code></pre>
 	</div>
 	<aside>
-	<p class="substep" data-order="1">We can of course define multiple property values. They'll be represented with sets. It's worth to note here, that dbjs handles two types of collection values <code>map</code> and <code>set</code>, and mentioned before atomic primitive values, which can represent any key or value of a map, or be part of a set</p>
+	<p class="substep" data-order="1">We can define multiple property values, they'll be represented with sets.</p>
 	<p class="substep" data-order="2">We can assure uniqueness of property values. Here it means that whenever we try to assign a patient to a second doctor exception will be thrown.</p>
-	<p class="substep" data-order="3">In case of object to object relations, we can define to have property holder exposed at it's value object. In this example doctor, to which patient was assigned will be also revealed at <code>doctor</code> property on patient.</p>
-	<p class="substep" data-order="4">Still, it's not everything, in this presentation I introduce features very selectively, there are many things I'm not able to cover in this short run</p>
+	<p class="substep" data-order="3">In case of object to object relations, we can define to have property holder exposed at its value object. In this example doctor, to which patient was assigned will be also revealed at <code>doctor</code> property on patient.</p>
 </aside>
 </section>
 
@@ -451,7 +425,7 @@ john.birthDate;             // [Date 1977, 0, 3]</span></code></pre>
 	</div>
 	<aside>
 <p>At any time we can take the descriptor of any property, change chosen characteristics and it will have instant impact on the data</p>
-<p class="substep" data-order="1">Still it's not destructive for the data. Assigning back previous value will bring back previous state</p>
+<p class="substep" data-order="1">It works in non destructive way. Assigning back previous value will bring back previous state</p>
 </aside>
 </section>
 
@@ -500,7 +474,7 @@ john.birthDate;             // [Date 1977, 0, 3]</span></code></pre>
 	</div>
 </div>
 	<aside>
-<p>So, how all those changes are represented for persistent layer (?)</p>
+<p>How all those changes are represented for persistent layer?</p>
 <div class="substep" data-order="1">
 <p>In a table there's a representation of al updates that I did in previous examples. It's not shown in this table, but each update is marked with a unique timestamp of microseconds accuracy. Directly we of course never work with this notation</p>
 <p class="substep" data-order="2">Key column represents ids of entities that were updated.</p>
@@ -530,7 +504,7 @@ john.birthDate;             // [Date 1977, 0, 3]</span></code></pre>
 	<aside>
 		<p>Application helps citizens of Lomas de Zamora (province of Buenos Aires) to register the business</p>
 		<p>Whole application model is defined with help of dbjs engine. It's complex, <b>model definition covers over 12 000 properties</b>.</p>
-		<p>Each view is configured reactive way with help of domjs. Apart of exceptions of few static pages of public website, it's all <b>pure direct DOM generation, with no innerHTML involved</b></p>
+		<p>Each view is configured reactive way with help of domjs. Apart of exception of few static pages of public website, it's all <b>pure direct DOM generation, with no innerHTML involved</b></p>
 		<p>There's a <a href="http://elomas.gob.ar/simulation/">simulation page</a> where you can see demo of a initial form visible to registered user. Based on area in which business activity would be pursued and other business characteristics it is decided what would be the cost of registration, what conditions have to be met and which documents are required by applicant for successfully registration</p>
 		<p>Most of meta data involved in this decision making, can be edited in special administration panel, described e.g. here <a href="http://elomas.gob.ar/ayuda-datos/control-de-uso-de-suelo/">Example 1</a> <a href="http://elomas.gob.ar/ayuda-datos/control-de-seguridad-e-higiene/">Example 2</a>, <a href="http://elomas.gob.ar/ayuda-datos/cruce-actividades-determinantes/">Example 3</a>. Changes made in those panels do not require restart of a server, they immediatelly affect the state of the data.</p>
 	</aside>
@@ -542,8 +516,8 @@ john.birthDate;             // [Date 1977, 0, 3]</span></code></pre>
 		<p class="img"><img id="architecture" src="/architecture.png" /></p>
 	</div>
 	<aside>
-		<p>Modern client is nearly self efficient process. Needed databse content is replicated from server by Access Control logic which knows which data is expected on a client, then it w</p>
-		<p>Few of the presented components are still in development, e.g. you can notice, that we use same presenter logic as on client side to produce static HTML pages to legacy engines. All our views where from the beginning written with this in mind. I hoped we'll have that feature complete for Front-Trends, but we're still need some time for that.</p>
+		<p>Modern client is nearly a self efficient process. Needed database content is replicated from server by Access Control logic which knows which data is expected on a client, and validates data coming from it</p>
+		<p>Few of the presented components are still in development, e.g. you can notice, that we use same presenter logic as on client side to produce static HTML pages to legacy engines. All our views where from the beginning written with this in mind, and we're not far from having that part complete</p>
 	</aside>
 </section>
 
