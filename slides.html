@@ -13,9 +13,9 @@
 	</div>
 
 	<aside>
-<p>Insight into few concepts of reactive web applications architecture, with which we deliver egovernment solutions (full-stack JS, HTML5) to citizens in various parts of the world.</p>
-
-<p>At the end of my speech I will showcase application that we recently released and which we hope make company registration process in Buenos Aires area easier.</p>
+		<p>Insight into some concepts of reactive web applications architecture</p>
+		<p>With stack based on this ideas we help UNCTAD to deliver egovernment solutions (full-stack JS, HTML5) to citizens in various parts of the world</p>
+		<p>At the end of my speech I will showcase application that we released recently.</p>
 		<hr />
 		<p>Made with <a href="http://markdalgleish.com/projects/bespoke.js/">Bespoke.js</a> engine developed by <a href="https://twitter.com/markdalgleish">Mark Dalgleish</a></p>
 		<p>See <a href="https://github.com/medikoo/reactive-way">Github</a> for a source code of this presentation, and instructions on how to run it locally</p>
@@ -28,10 +28,9 @@
 <section data-bespoke-id="fusion-reactor">
 	<div class="content"><a href="https://twitter.com/mraleph/statuses/411549064787152896" target="_blank"><img src="/mraleph.png" width="500" /></a></div>
 	<aside>
-		<p>Mr Vyacheslav made really a valid point in that tweet</p>
-		<p>The way we build web applications of today in many cases do not touch the potential that modern engines have to offer</p>
+		<p>The way we build web applications of today in many cases do not touch the potential that modern engines have to offer.</p>
 		<p>Popular frameworks are still prisoners of support of ES3 based engines.</p>
-		<p>Additionally we waste a lot of time on micro-optimizations and we tend to repeat the patterns with which we developed web applications 5, 10 even 15 years ago</p>
+		<p>Additionally developers tend to focus on micro-optimizations and like to repeat the patterns with which we developed web applications over a decade ago</p>
 	</aside>
 </section>
 <section data-bespoke-id="web-architecture">
@@ -41,8 +40,6 @@
 	</div>
 	<aside>
 		<p>Before I'll get into raw meat, let's have a quick and very general overview of how we deliver applications.</p>
-		<p>We can distinguish three important components:</p>
-		<p>A persistent storage for all the data, a server which runs business logic, responds do requests, delivers the interface, and a client right in front of a consumer of application</p>
 	</aside>
 </section>
 
@@ -96,7 +93,7 @@
 		<p class="img"><img src="/serialize-unserialize-today.png" width="750" /></p>
 	</div>
 	<aside>
-		<p>While we noticed the potential, still quite often we repeat same patterns of website delivery</p>
+		<p>While we try to address the potential, still quite often we reuse old patterns</p>
 	</aside>
 </section>
 
@@ -106,8 +103,8 @@
 		<p class="img"><img src="/modern-client.png" width="600" /></p>
 	</div>
 	<aside>
-		<p>Maybe we can reduce number of involved transformations (?)</p>
-		<p>Maybe we can make much better use of (much more capable and much more powerful) application process we have now (?)</p>
+		<p>What if we try to make a better use of potential we have.</p>
+		<p>Our application setup can be a living, reactive organism.</p>
 	</aside>
 </section>
 
@@ -124,7 +121,7 @@
 
 <section data-bespoke-id="spreadsheet-application">
 	<div class="content">
-		<h1>Compose flow<br />like in a spreadsheet application</h1>
+		<h1>Compose application flow<br />like in a spreadsheet application</h1>
 		<p class="img"><img src="/spreadsheet.gif" width="400" /></p>
 	</div>
 	<aside>
@@ -162,9 +159,9 @@ console.log(a); // 7</span></code></pre>
 	</div>
 	<aside>
 		<div class="substep" data-order="3">
-		<p>This how reactivity works in most popular reactive tools today, and it's actually how we can force reactiveness to not really reactive architectures</p>
-		<p>This is how we update state in many SPA applications today, e.g. on change we regenerate new HTML, replace with new one, and make sure old one ready to be garbage collected</p>
-		<p>Still I would call it an emulation of reactive setup, we can do better...</p>
+		<p>This is how reactivity works in most popular reactive tools today, and it's how we can force reactiveness to not really reactive architectures</p>
+		<p>e.g. on change we regenerate new HTML and replace old one assuring it's free for garbage collection</p>
+		<p>Still it's more of an emulation of reactive setup, we can do better...</p>
 </div>
 	</aside>
 </section>
@@ -209,7 +206,7 @@ exampleForm.oninput = function () {
 			</div>
 			<div class="substep" data-action="insert" data-order="1">
 				<div id="domjs-example"></div>
-				<p>See <a href="https://github.com/medikoo/domjs#domjs">client/examples/reactive-dom.js</a></p>
+				<p>See <a href="https://github.com/medikoo/reactive-way/blob/master/client/examples/domjs.js">client/examples/domjs.js</a></p>
 			</div>
 		</div>
 	</div>
@@ -239,10 +236,9 @@ exampleForm.oninput = function () {
 });</mark></code></pre>
 	</div>
 	<aside>
-		<p>In that example data objects already come with observable interface implied and are provided by <a href="https://github.com/medikoo/dbjs">dbjs</a> engine, which I'll talk about in next slides</p>
+		<p>In that example data objects already come with observable interface implied (are provided by <a href="https://github.com/medikoo/dbjs">dbjs</a> engine, which I'll talk about in next slides)</p>
 		<div class="substep" data-order="1">
 <p><code>company.name</code> returns plain string value, but <code>company._name</code> returns an observable of company's <code>name</code> property.</p>
-		<p><code>_</code> (underscore) choice may feel controversial. Still I prefered that over <code>$</code>. There's also explicit way via <code>getObservable('name')</code>, but using it, would introduce a lot of noise to the templates</p>
 		</div>
 		<p class="substep" data-order="2">There are functions which help compose reactive configurations in straightforward way, e.g. this paragraph, will be included in DOM, only if <code>company.isSubmissionComplete</code> is falsy</p>
 		<p class="substep" data-order="3">Plain text can be mixed with reactive one</p>
@@ -277,7 +273,7 @@ exampleForm.oninput = function () {
 	<aside>
 		<p>Views is where reactivity really shines, but the most powerful part of system we're working with is In-Memory Database written in plain JS</p>
 		<p>Persistently our data is stored in representatin of primitive key/value pairs, but it doesn't mean we process our applications data working with that notation</p>
-		<p>On top of that we have an engine, which provides a means to manipulate, filter, search, index the data in probably most natural (for JavaScript language) way you can imagine</p>
+		<p>On top of that there's an engine, which provides a means to manipulate, filter, search, index the data in probably most natural (for JavaScript language) way you can imagine</p>
 	</aside>
 </section>
 
@@ -298,7 +294,7 @@ exampleForm.oninput = function () {
 		</div>
 	</div>
 	<aside>
-		<p>What is dbjs really? If I would have to put it one sentence: <b>It's a database of events which on a front composes into familiar language structures.</b> dbjs it's also designed to be as seamless with the langauge as possible</p>
+		<p>What If I would have to put it one sentence, I'd say <b>dbjs is a database of events which on a front composes into familiar language structures.</b> dbjs it's also designed to be as seamless with the langauge as possible</p>
 		<p class="substep" data-order="1">Creating a database instance is like creating a new realm for your data.</p>
 	</aside>
 </section>
@@ -320,7 +316,6 @@ db.ZipCode('whatever'); // TypeError</span></code></pre>
 	</div>
 	<aside>
 		<p>Any Type can be extended to more custom one</p>
-		<p>Example on right is actually an equivalent of <code>ShortString extends String</code> ES6 classes syntax, and here <code>extend</code> function shares similar signature as <code>Object.create</code> as it accepts descriptors for properties. It's however about dbjs (no ES5) level descriptors that describe meta characteristics of given property</p>
 	</aside>
 </section>
 
@@ -346,7 +341,8 @@ obj.get(true); // 'Value for boolean true'</code></pre>
 </div>
 	</div>
 	<aside>
-<p>There's Object type, it may seem to work exactly as native JS constructor, but there's of course significant difference. With very simple (behind a scenes) setup, all those operations can easily be saved and restored, but we'll get to that later</p>
+<p>..and there's an Object type</p>
+<p>It may seem to work exactly same as native JS constructor, but difference is, that with very simple (behind a scenes) setup, all this operations chain can easily be saved and restored, we'll get to that later.</p>
 <p class="substep" data-order="1">Objects are a combinations of object dictionaries and instances of <code>Map</code> (type introduced with ECMAScript 6)</p>
 <p class="substep" data-order="2">Turning it around we can say it's a map with all string keys exposed as object properties</p>
 	</aside>
@@ -374,9 +370,9 @@ john.fullName; // "John Smith"</span></code></pre>
 	<p>To define classes with which we model our application data, we extend Object type</p>
 	<p class="substep" data-order="1">We define our data with descriptors of meta characteristics</p>
 <div class="substep" data-order="2">
-	<p>We can also define dynamic properties. They do not need any other handling to work as expected. dbjs internally uses <a href="https://github.com/medikoo/esniff">esniff</a> low footprint ECMAScript parser, and knows on which properties this property depends. In case of more complex dependency setup, that can't be reliably statically parsed, you can make use of <code>_observe</code> registration function, provided as first argument, and call it wih any observable which value affects the result.</p>
+	<p>We can also define dynamic properties. They do not need any other handling to work as expected. dbjs internally uses <a href="https://github.com/medikoo/esniff">esniff</a> low footprint ECMAScript parser, and knows on which properties this property depends. In case of more complex dependency setup, that can't be reliably statically parsed, you can make use of <code>_observe</code> registration function, provided as first argument, and call it with any observable value which affects the result.</p>
 	<p>Dynamic property can depend on other dynamic properties, and can also generate dynamic collections (set), it's one of the most powerful aspects of this engine.</p>
-	<p class="substep" data-order="3">Instances can be created in a way you can guess. If you wonder, <code>new</code> keyword is optional</p>
+	<p class="substep" data-order="3">Instances can be created in a way you can guess. <code>new</code> keyword is optional</p>
 </div>
 </aside>
 </section>
@@ -404,7 +400,7 @@ john.doctor; // drHouse</span></code></pre>
 	</div>
 	<aside>
 	<p class="substep" data-order="1">We can define multiple property values, they'll be represented with sets.</p>
-	<p class="substep" data-order="2">We can assure uniqueness of property values. Here it means that whenever we try to assign a patient to a second doctor exception will be thrown.</p>
+	<p class="substep" data-order="2">We can assure uniqueness of property values. Here it means that whenever we try to assign a patient to a second doctor, exception will be thrown.</p>
 	<p class="substep" data-order="3">In case of object to object relations, we can define to have property holder exposed at its value object. In this example doctor, to which patient was assigned will be also revealed at <code>doctor</code> property on patient.</p>
 </aside>
 </section>
@@ -476,11 +472,13 @@ john.birthDate;             // [Date 1977, 0, 3]</span></code></pre>
 	<aside>
 <p>How all those changes are represented for persistent layer?</p>
 <div class="substep" data-order="1">
-<p>In a table there's a representation of al updates that I did in previous examples. It's not shown in this table, but each update is marked with a unique timestamp of microseconds accuracy. Directly we of course never work with this notation</p>
+<p>In a table there's a representation of al updates that I did in previous examples.</p>
+<p>What is not shown in this table (for brevity) is a unique microseconds timestamp.</p>
+<p>Directly we do not work with this notation</p>
 <p class="substep" data-order="2">Key column represents ids of entities that were updated.</p>
 <p class="substep" data-order="2.001">Newly crated object are marked with universally unique identifiers. It's based on current microseconds timestamp and random string</p>
 <p class="substep" data-order="2.002">Meta (descriptor) properties are identified with <code>$</code></p>
-<p class="substep" data-order="2.003">First character of serialized value tells us what is it.</p>
+<p class="substep" data-order="2.003">First character of serialized value tells us what javascript type we serialize.</p>
 <p class="substep" data-order="2.004">On reinitialization those events can be unserialized in any order to restore the state</p>
 </div>
 </aside>
@@ -490,7 +488,7 @@ john.birthDate;             // [Date 1977, 0, 3]</span></code></pre>
 	<div class="content">
 		<h1>dbjs basic demo</h1>
 		<div id="dbjs-example"></div>
-		<p>See <a href="https://github.com/medikoo/domjs#domjs">client/examples/reactive-dom.js</a></p>
+		<p>See <a href="https://github.com/medikoo/reactive-way/blob/master/client/examples/dbjs.js">client/examples/dbjs.js</a></p>
 	</div>
 	<aside>
 		<p>Simple demo showing how log of events is filled as we manipulate the data</p>
@@ -516,7 +514,8 @@ john.birthDate;             // [Date 1977, 0, 3]</span></code></pre>
 		<p class="img"><img id="architecture" src="/architecture.png" /></p>
 	</div>
 	<aside>
-		<p>Modern client is nearly a self efficient process. Needed database content is replicated from server by Access Control logic which knows which data is expected on a client, and validates data coming from it</p>
+		<p>It's a diagram taken from our technical documentation</p>
+		<p>Modern client is nearly a self sufficient process. Needed database content is replicated from server by Access Control logic which knows which data is expected on a client, and validates data coming from it</p>
 		<p>Few of the presented components are still in development, e.g. you can notice, that we use same presenter logic as on client side to produce static HTML pages to legacy engines. All our views where from the beginning written with this in mind, and we're not far from having that part complete</p>
 	</aside>
 </section>
