@@ -2,7 +2,7 @@
 
 Error.stackTraceLimit = Infinity;
 
-var env, options, root, container, countP;
+var env, options, root, container, countP, bespoke, plugins;
 
 try {
 	env = require('../env');
@@ -23,33 +23,26 @@ document.body.appendChild(container = document.createElement('article')).innerHT
 require('./lib/highlight');
 
 // Bespoke engine + necessary plugins
-require('bespoke');
-bespoke.plugins.history = require('bespoke-history');
-require('bespoke-keys');
-bespoke.plugins.notes = require('bespoke-notes');
-require('bespoke-progress');
-bespoke.plugins.substeps = require('bespoke-substeps');
-require('bespoke-scale');
-require('bespoke-touch');
+bespoke = require('bespoke');
 
-options = {
-	history: env.root || true,
-	keys: true,
-	notes: true,
-	progress: true,
-	scale: true,
-	substeps: true,
-	touch: true
-};
+plugins = [
+	require('bespoke-classes')(),
+	require('bespoke-history')(env.root || true),
+	require('bespoke-keys')(),
+	require('bespoke-progress')(),
+	require('bespoke-notes')(),
+	require('bespoke-substeps')(),
+	require('bespoke-scale')(),
+	require('bespoke-touch')()
+];
 
 if (env.sync) {
-	bespoke.plugins.sync = require('bespoke-sync/client');
-	options.sync = { log: true, ssePath: root + 'sse-slides/',
-		xhrPath: root + 'slide/' };
+	plugins.push(require('bespoke-sync/client')({ log: true, ssePath: root + 'sse-slides/',
+		xhrPath: root + 'slide/' }));
 }
 
 // Intialize slides engine
-window.deck = bespoke.from('article', options);
+window.deck = bespoke.from('article', plugins);
 
 // Preload images
 require('./lib/preload-images');
