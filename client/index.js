@@ -2,7 +2,7 @@
 
 Error.stackTraceLimit = Infinity;
 
-var env, options, root, container, countP, bespoke, plugins;
+var env, root, container, countP, bespoke, plugins;
 
 try {
 	env = require('../env');
