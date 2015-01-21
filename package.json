@@ -29,7 +29,7 @@
     "dbjs-ext": "0.0.1",
     "deferred": "~0.7.1",
     "dom-ext": "0.0.1",
-    "domjs": "git://github.com/medikoo/domjs.git",
+    "domjs": "git://github.com/medikoo/domjs.git#fc054881",
     "fs2": "~0.2.1",
     "highlight.js": "~8.2.0",
     "memoizee": "~0.3.7",
