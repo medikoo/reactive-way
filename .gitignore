@@ -4,3 +4,4 @@
 /.lintcache
 /public/main.js
 /env.json
+/package-lock.json
