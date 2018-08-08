@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
-var Highlight = require('highlight.js/lib/highlight')
-  , hljs = new Highlight();
+var hljs = require("highlight.js/lib/highlight");
 
-hljs.registerLanguage('javascript',
-	require('highlight.js/lib/languages/javascript'));
+hljs.registerLanguage("javascript", require("highlight.js/lib/languages/javascript"));
 
 hljs.initHighlighting();
