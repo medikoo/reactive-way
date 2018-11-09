@@ -1,48 +1,48 @@
 {
-    "private": true,
-    "name": "reactive-way",
-    "version": "0.1.0",
-    "description": "Reactive Way (May 2014, FrontTrends presentation)",
-    "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/medikoo/reactive-way.git"
-    },
-    "dependencies": {
-        "bespoke": "^1.1",
-        "bespoke-classes": "1",
-        "bespoke-history": "^0.2.3",
-        "bespoke-keys": "^1.1",
-        "bespoke-notes": "^2.1.2",
-        "bespoke-progress": "1",
-        "bespoke-scale": "git://github.com/medikoo/bespoke-scale.git#reread-slide-size",
-        "bespoke-substeps": "^1.0.1",
-        "bespoke-sync": "^0.2.1",
-        "bespoke-touch": "1",
-        "connect": "^3.6.6",
-        "entities": "^1.1.1",
-        "es5-ext": "^0.10.45",
-        "d": "1",
-        "dbjs": "^0.1.9",
-        "dbjs-dom": "^0.1.2",
-        "dbjs-domjs": "^0.1.1",
-        "dbjs-ext": "0.1",
-        "deferred": "^0.7.9",
-        "dom-ext": "^0.1.5",
-        "domjs": "^0.3.2",
-        "fs2": "^0.2.7",
-        "highlight.js": "^9.12",
-        "memoizee": "^0.4.13",
-        "observable-value": "0.1",
-        "punycode": "^2.1.1",
-        "st": "^1.2.2",
-        "webmake": "^0.4"
-    },
-    "devDependencies": {
-        "webmake-middleware": "^0.1.2"
-    },
-    "scripts": {
-        "start": "node server/index.js"
-    },
-    "licence": "MIT"
+  "private": true,
+  "name": "reactive-way",
+  "version": "0.1.0",
+  "description": "Reactive Way (May 2014, FrontTrends presentation)",
+  "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/medikoo/reactive-way.git"
+  },
+  "dependencies": {
+    "bespoke": "^1.1",
+    "bespoke-classes": "1",
+    "bespoke-history": "^0.2.3",
+    "bespoke-keys": "^1.1",
+    "bespoke-notes": "^2.1.2",
+    "bespoke-progress": "1",
+    "bespoke-scale": "git://github.com/medikoo/bespoke-scale.git#reread-slide-size",
+    "bespoke-substeps": "^1.0.1",
+    "bespoke-sync": "^0.2.1",
+    "bespoke-touch": "1",
+    "connect": "^3.6.6",
+    "entities": "^1.1.1",
+    "es5-ext": "^0.10.45",
+    "d": "1",
+    "dbjs": "^0.1.9",
+    "dbjs-dom": "^0.1.2",
+    "dbjs-domjs": "^0.1.1",
+    "dbjs-ext": "0.1",
+    "deferred": "^0.7.9",
+    "dom-ext": "^0.1.5",
+    "domjs": "^0.3.2",
+    "fs2": "^0.2.7",
+    "highlight.js": "^9.12",
+    "memoizee": "^0.4.13",
+    "observable-value": "0.1",
+    "punycode": "^2.1.1",
+    "st": "^1.2.2",
+    "webmake": "^0.4"
+  },
+  "devDependencies": {
+    "webmake-middleware": "gillesruppert/webmake-middleware"
+  },
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "licence": "MIT"
 }
