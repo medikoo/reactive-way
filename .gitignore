@@ -1,7 +1,6 @@
-.DS_Store
-/node_modules
-/npm-debug.log
 /.lintcache
-/public/main.js
 /env.json
+/node_modules
+npm-debug.log
+/public/main.js
 /package-lock.json
